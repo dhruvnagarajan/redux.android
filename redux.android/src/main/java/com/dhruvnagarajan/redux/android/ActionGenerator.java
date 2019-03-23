@@ -3,7 +3,7 @@ package com.dhruvnagarajan.redux.android;
 /**
  * @author Dhruvaraj Nagarajan
  */
-public abstract class ActionGenerator extends Store {
+public abstract class ActionGenerator {
 
 //    public enum Singleton {
 

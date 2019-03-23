@@ -10,6 +10,6 @@ package com.dhruvnagarajan.redux.android
  *
  * @author Dhruvaraj Nagarajan
  */
-data class State(var map: HashMap<String, Any?>?) {
-    constructor() : this(null)
+data class State(var map: HashMap<String, Any?>) {
+    constructor() : this(HashMap())
 }
