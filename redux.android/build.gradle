@@ -21,15 +21,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:$supportLibraryV"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinV"
-    implementation "io.reactivex.rxjava2:rxjava:$rxV"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidV"
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
     mavenCentral()

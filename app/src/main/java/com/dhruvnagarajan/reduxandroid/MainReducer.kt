@@ -11,10 +11,10 @@ class MainReducer : Reducer() {
     override fun reduce(event: Event, store: HashMap<String, Any?>) {
         when (event.actionType) {
             MainActions.INCREMENT -> {
-                var previousValue: Int? = store[MainActions.INCREMENT] as? Int
+                var previousValue: Int? = store["count"] as? Int
                 if (previousValue == null)
                     previousValue = 0
-                store[MainActions.INCREMENT] = previousValue + event.payload as Int
+                store["count"] = previousValue + event.payload as Int
             }
         }
     }

@@ -1,45 +1,34 @@
 package com.dhruvnagarajan.redux.android
 
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
-
 /**
  * @author Dhruvaraj Nagarajan
  */
 class Store private constructor() {
 
-    private val storeData = StoreData()
+    private var map = HashMap<String, Any?>()
+    lateinit var storeChangeListener: StoreChangeListener
 
-    private var storeObservable: PublishSubject<StoreData> = PublishSubject.create()
-
-    fun subscribe(observer: Observer<StoreData>) {
-        storeObservable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer)
+    fun subscribe(storeChangeListener: StoreChangeListener) {
+        this.storeChangeListener = storeChangeListener
     }
 
     fun putGlobal(event: Event) {
-        storeData.event = event
-        storeData.store[event.actionType] = event.payload
-        storeObservable.onNext(storeData)
+        map[event.actionType] = event.payload
+        storeChangeListener.onChange(event, map)
     }
 
     // requires optimization
     fun putLocal(event: Event) {
-        val storeData = StoreData()
-        storeData.event = event
-        storeData.store = HashMap()
-        storeData.store[event.actionType] = event.payload
-        storeObservable.onNext(storeData)
+        val store = HashMap<String, Any?>()
+        store[event.actionType] = event.payload
+        storeChangeListener.onChange(event, store)
     }
-
-    data class StoreData(var event: Event = Event("init"),
-                         var store: HashMap<String, Any?> = HashMap())
 
     internal enum class Singleton(val obj: Store) {
-
         INSTANCE(Store())
     }
+}
+
+interface StoreChangeListener {
+    fun onChange(event: Event, store: HashMap<String, Any?>)
 }

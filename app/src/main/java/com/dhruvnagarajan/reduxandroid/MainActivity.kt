@@ -4,7 +4,7 @@ import com.dhruvnagarajan.redux.android.Event
 import com.dhruvnagarajan.redux.android.ReduxAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : ReduxAppCompatActivity<MainReducer, MainActions>() {
+class MainActivity : ReduxAppCompatActivity<MainActions, MainReducer>() {
 
     override fun provideReducer(): MainReducer = MainReducer()
 
@@ -24,8 +24,7 @@ class MainActivity : ReduxAppCompatActivity<MainReducer, MainActions>() {
         val state = HashMap<String, Any?>()
         store.forEach { (key, value) ->
             when (key) {
-                MainActions.INCREMENT,
-                MainActions.DECREMENT -> state["count"] = value
+                "count" -> state["count"] = value
             }
         }
         return state
