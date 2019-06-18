@@ -22,17 +22,40 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.dhruvnagarajan.redux.android
+package com.dhruvnagarajan.reduxandroid
 
-import java.util.*
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
+import kotlinx.android.synthetic.main.activity_one.*
 
 /**
  * @author Dhruvaraj Nagarajan
  */
-interface Reducer {
+class FirstActivity : BaseActivity<FirstViewModel>() {
 
-    /**
-     * @return reduced payload      action contains payload sent via dispatch(). This payload can be added to the store as is, or reduced.
-     */
-    fun reduce(action: Action, appState: TreeMap<String, Any?>)
+    override fun getLayout(): Int = R.layout.activity_one
+
+    override fun provideViewModel(): FirstViewModel = ViewModelProviders.of(this).get(FirstViewModel::class.java)
+
+    override fun onCreateView() {
+        viewModel.lifecycle = lifecycle
+
+        b_increment.setOnClickListener {
+            viewModel.increment()
+        }
+
+        b_decrement.setOnClickListener {
+            viewModel.decrement()
+        }
+
+        b_next_screen.setOnClickListener {
+            val i = Intent(this, SecondActivity::class.java)
+            startActivity(i)
+        }
+    }
+
+    override fun onAttachObservers() {
+        viewModel.countLiveData.observe(this, Observer { tv_count.text = it.toString() })
+    }
 }
