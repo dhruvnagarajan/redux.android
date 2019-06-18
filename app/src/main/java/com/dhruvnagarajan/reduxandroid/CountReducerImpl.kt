@@ -22,17 +22,39 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.dhruvnagarajan.redux.android
+package com.dhruvnagarajan.reduxandroid
 
+import com.dhruvnagarajan.redux.android.Action
+import com.dhruvnagarajan.redux.android.Reducer
 import java.util.*
 
 /**
  * @author Dhruvaraj Nagarajan
+ *
+ * Optional implementation of Reducer.
+ * Passed to Redux via [ReduxViewModel.addReducers].
+ *
+ * If ReduxViewModel is not used, then reducer(s) could be passed to
+ * [ReduxStore.subscribeWithReducer(s)] during subscription.
+ *
+ * Reducers will be removed upon unsubscription.
+ * ReduxViewModel handles subscription implicitly.
  */
-interface Reducer {
+object CountReducerImpl : Reducer {
 
     /**
-     * @return reduced payload      action contains payload sent via dispatch(). This payload can be added to the store as is, or reduced.
+     * @return reduced payload
+     *
+     * [Action.payload] sent via dispatch(). This payload can be consumed as is, or reduced.
      */
-    fun reduce(action: Action, appState: TreeMap<String, Any?>)
+    override fun reduce(action: Action, appState: TreeMap<String, Any?>) {
+        when (action.actionType) {
+            "inc" -> {
+                appState["count"] = appState["count"] as Int + action.payload as Int
+            }
+            "dec" -> {
+                appState["count"] = appState["count"] as Int - action.payload as Int
+            }
+        }
+    }
 }

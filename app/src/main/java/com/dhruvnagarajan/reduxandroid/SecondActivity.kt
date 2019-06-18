@@ -22,17 +22,34 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.dhruvnagarajan.redux.android
+package com.dhruvnagarajan.reduxandroid
 
-import java.util.*
+import android.arch.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.activity_second.*
 
 /**
  * @author Dhruvaraj Nagarajan
  */
-interface Reducer {
+class SecondActivity : BaseActivity<SecondViewModel>() {
 
-    /**
-     * @return reduced payload      action contains payload sent via dispatch(). This payload can be added to the store as is, or reduced.
-     */
-    fun reduce(action: Action, appState: TreeMap<String, Any?>)
+    override fun getLayout(): Int = R.layout.activity_second
+
+    override fun provideViewModel(): SecondViewModel = ViewModelProviders.of(this).get(SecondViewModel::class.java)
+
+    override fun onCreateView() {
+        viewModel.lifecycle = lifecycle
+        b_submit.setOnClickListener {
+            if (et_text.text.toString().isEmpty()) {
+                et_text.error = "Count cannot be empty"
+                et_text.requestFocus()
+                return@setOnClickListener
+            }
+            et_text.error = null
+            viewModel.setCount(et_text.text.toString().toInt())
+            finish()
+        }
+    }
+
+    override fun onAttachObservers() {
+    }
 }

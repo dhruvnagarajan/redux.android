@@ -22,17 +22,36 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.dhruvnagarajan.redux.android
+package com.dhruvnagarajan.reduxandroid
 
-import java.util.*
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.dhruvnagarajan.redux.android.ReduxViewModel
 
 /**
  * @author Dhruvaraj Nagarajan
  */
-interface Reducer {
+abstract class BaseActivity<T : ReduxViewModel> : AppCompatActivity() {
 
-    /**
-     * @return reduced payload      action contains payload sent via dispatch(). This payload can be added to the store as is, or reduced.
-     */
-    fun reduce(action: Action, appState: TreeMap<String, Any?>)
+    lateinit var viewModel: T
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(getLayout())
+        viewModel = provideViewModel()
+        onCreateView()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        onAttachObservers()
+    }
+
+    abstract fun getLayout(): Int
+
+    abstract fun provideViewModel(): T
+
+    abstract fun onCreateView()
+
+    abstract fun onAttachObservers()
 }

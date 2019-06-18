@@ -22,17 +22,30 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.dhruvnagarajan.redux.android
+package com.dhruvnagarajan.reduxandroid
 
+import android.app.Application
+import com.dhruvnagarajan.redux.android.BuildConfig
+import com.dhruvnagarajan.redux.android.ReduxStore
+import com.squareup.leakcanary.LeakCanary
 import java.util.*
 
 /**
  * @author Dhruvaraj Nagarajan
  */
-interface Reducer {
+class App : Application() {
 
-    /**
-     * @return reduced payload      action contains payload sent via dispatch(). This payload can be added to the store as is, or reduced.
-     */
-    fun reduce(action: Action, appState: TreeMap<String, Any?>)
+    override fun onCreate() {
+        super.onCreate()
+
+        LeakCanary.install(this)
+
+        val initialState = TreeMap<String, Any?>()
+        initialState["count"] = 0
+
+        ReduxStore.Builder()
+            .withInitialState(initialState)
+            .isDebug(BuildConfig.DEBUG)
+            .build()
+    }
 }

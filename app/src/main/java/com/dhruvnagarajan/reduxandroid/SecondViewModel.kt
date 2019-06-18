@@ -22,17 +22,23 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.dhruvnagarajan.redux.android
+package com.dhruvnagarajan.reduxandroid
 
+import com.dhruvnagarajan.redux.android.Action
+import com.dhruvnagarajan.redux.android.ReduxViewModel
 import java.util.*
 
 /**
  * @author Dhruvaraj Nagarajan
  */
-interface Reducer {
+class SecondViewModel : ReduxViewModel() {
 
-    /**
-     * @return reduced payload      action contains payload sent via dispatch(). This payload can be added to the store as is, or reduced.
-     */
-    fun reduce(action: Action, appState: TreeMap<String, Any?>)
+    override fun getTag(): String = SecondViewModel::class.java.name
+
+    override fun onStateChange(action: Action, appState: TreeMap<String, Any?>) {
+    }
+
+    fun setCount(count: Int) {
+        dispatchIncognitoAction(Action("count", count))
+    }
 }
