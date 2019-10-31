@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -27,6 +28,19 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "com.google.code.gson:gson:$gson_v"
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.10.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.10.0'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.10.0'
+
+    implementation "com.google.dagger:dagger:2.24"
+    kapt "com.google.dagger:dagger-compiler:2.24"
 
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"

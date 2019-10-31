@@ -16,8 +16,7 @@
 
 package com.dhruvnagarajan.reduxandroid
 
-import com.dhruvnagarajan.redux.android.Action
-import com.dhruvnagarajan.redux.android.ReduxViewModel
+import com.dhruvnagarajan.android.pubsub.Action
 import java.util.*
 
 /**

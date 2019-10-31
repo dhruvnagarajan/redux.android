@@ -17,8 +17,7 @@
 package com.dhruvnagarajan.reduxandroid
 
 import android.app.Application
-import com.dhruvnagarajan.redux.android.BuildConfig
-import com.dhruvnagarajan.redux.android.ReduxStore
+import com.dhruvnagarajan.android.pubsub.ReduxStore
 import com.squareup.leakcanary.LeakCanary
 import java.util.*
 

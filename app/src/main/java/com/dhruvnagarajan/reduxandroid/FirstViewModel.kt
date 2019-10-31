@@ -17,9 +17,7 @@
 package com.dhruvnagarajan.reduxandroid
 
 import android.arch.lifecycle.MutableLiveData
-import com.dhruvnagarajan.redux.android.Action
-import com.dhruvnagarajan.redux.android.Reducer
-import com.dhruvnagarajan.redux.android.ReduxViewModel
+import com.dhruvnagarajan.android.pubsub.Action
 import java.util.*
 
 /**

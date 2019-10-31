@@ -18,7 +18,6 @@ package com.dhruvnagarajan.reduxandroid
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.dhruvnagarajan.redux.android.ReduxViewModel
 
 /**
  * @author Dhruvaraj Nagarajan
