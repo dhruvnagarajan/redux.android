@@ -29,7 +29,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "com.google.code.gson:gson:$gson_v"
+    implementation "com.google.code.gson:gson:$gson_version"
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
 
     implementation "androidx.room:room-runtime:$room_version"
@@ -39,8 +39,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-core:2.10.0'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.10.0'
 
-    implementation "com.google.dagger:dagger:2.24"
-    kapt "com.google.dagger:dagger-compiler:2.24"
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
